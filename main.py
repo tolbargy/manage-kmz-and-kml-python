@@ -27,10 +27,10 @@ def crearElementoHijo(element_parent: ET.Element, name_children: str):
       return element_children
    else:
       logging.info(f"Ya existe el elemento <{name_children}>")
+      return exist_element_children
 
 def moverElemento(element_old_parent: ET.Element, element_new_parent: ET.Element, name_children: str):
       element_children = element_old_parent.find(f"default:{name_children}",ns)
-      print(element_children)
       element_new_parent.append(element_children)
       element_old_parent.remove(element_children)
 
