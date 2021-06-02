@@ -9,14 +9,22 @@ ns = {'default': default_namespace}
 
 def main():      
    punto_tree = ET.parse(path_solo_punto)
-   ruta_tree = ET.parse(path_solo_ruta)
    punto_root = punto_tree.getroot()
-   ruta_root = ruta_tree.getroot()
-
+   
    element_document = crearElementoHijo(punto_root,'Document')
    moverElemento(punto_root,element_document,'Placemark')
+   agregarDocumentRutaHaciaDocumentPunto(element_document)
    guardar_kml(punto_tree,path_solo_punto)
-   
+
+
+def agregarDocumentRutaHaciaDocumentPunto(element_document_punto):
+   ruta_tree = ET.parse(path_solo_ruta)
+   ruta_root = ruta_tree.getroot()
+   elements_document_ruta = ruta_root.find('default:Document',ns)
+   for element in elements_document_ruta:
+      logging.info(f"Se agregó elemento {element}")
+      element_document_punto.append(element)
+
 def crearElementoHijo(element_parent: ET.Element, name_children: str):
    exist_element_children = element_parent.find(f"default:{name_children}",ns)
    if exist_element_children is None:      
