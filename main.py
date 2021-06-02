@@ -23,19 +23,20 @@ def crearElementoHijo(element_parent: ET.Element, name_children: str):
       element_children = element_parent.makeelement(name_children,{})
       element_children.text = ' '
       element_parent.append(element_children)      
-      logging.info(f"Elemento <{name_children}> creado")
+      logging.info(f"Elemento <{name_children}> creado en el padre {element_parent}")
       return element_children
    else:
-      logging.info(f"Ya existe el elemento <{name_children}>")
+      logging.info(f"Ya existe el elemento <{name_children}> en el padre {element_parent}")
       return exist_element_children
 
 def moverElemento(element_old_parent: ET.Element, element_new_parent: ET.Element, name_children: str):
       element_children = element_old_parent.find(f"default:{name_children}",ns)
       if element_children is None:
-         logging.info(f"No se encuentra el elemento <{name_children}>")
+         logging.info(f"No se encuentra el elemento <{name_children}> en el padre {element_old_parent}")
       else:
          element_new_parent.append(element_children)
          element_old_parent.remove(element_children)
+         logging.info(f"Se ha movido el elemento <{name_children}> al nuevo padre {element_new_parent}")
 
 def guardar_kml(tree,path_file):
    ET.register_namespace('',default_namespace)
