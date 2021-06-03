@@ -1,3 +1,4 @@
+from io import BytesIO
 import xml.etree.ElementTree as ET
 import logging
 import zipfile
@@ -36,7 +37,9 @@ def procesar_agregacion_rutas(content):
     agregarDocumentRutaHaciaDocumentPunto(element_document)               
 
     ET.register_namespace('',default_namespace)
-    xml_final = ET.tostring(puntos_tree, encoding='UTF-8', method='xml').decode()
+    stream = BytesIO()
+    ET.ElementTree(puntos_tree).write(stream,encoding='UTF-8', method='xml',xml_declaration=True)
+    xml_final = stream.getvalue().decode()
     return xml_final
 
 def agregarDocumentRutaHaciaDocumentPunto(element_document_punto):
