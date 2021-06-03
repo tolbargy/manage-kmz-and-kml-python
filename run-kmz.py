@@ -16,16 +16,20 @@ def main():
         with inzip.open(inzipinfo) as infile:
             if inzipinfo.filename == name_file_kml:                
                 content = infile.read().decode()
-                puntos_tree = ET.fromstring(content)
-                element_document = puntos_tree.find(f"default:Document",ns)
-                agregarDocumentRutaHaciaDocumentPunto(element_document)               
-
-                ET.register_namespace('',default_namespace)
-                xml_final = ET.tostring(puntos_tree, encoding='utf8', method='xml').decode()
-                                
+                xml_final = procesar_agregacion_rutas(content)                                               
                 outzip.writestr(inzipinfo.filename, xml_final)
             else:
                outzip.writestr(inzipinfo.filename, infile.read())
+
+
+def procesar_agregacion_rutas(content):
+    puntos_tree = ET.fromstring(content)
+    element_document = puntos_tree.find(f"default:Document",ns)
+    agregarDocumentRutaHaciaDocumentPunto(element_document)               
+
+    ET.register_namespace('',default_namespace)
+    xml_final = ET.tostring(puntos_tree, encoding='utf8', method='xml').decode()
+    return xml_final
 
 def agregarDocumentRutaHaciaDocumentPunto(element_document_punto):
    ruta_tree = ET.parse(path_rutas)
