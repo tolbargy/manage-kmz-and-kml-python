@@ -36,7 +36,7 @@ def procesar_agregacion_rutas(content):
     agregarDocumentRutaHaciaDocumentPunto(element_document)               
 
     ET.register_namespace('',default_namespace)
-    xml_final = ET.tostring(puntos_tree, encoding='utf8', method='xml').decode()
+    xml_final = ET.tostring(puntos_tree, encoding='UTF-8', method='xml').decode()
     return xml_final
 
 def agregarDocumentRutaHaciaDocumentPunto(element_document_punto):
