@@ -1,14 +1,9 @@
-from io import BytesIO
 from pykml import parser
-from lxml import etree, objectify
+from lxml import etree
 import logging
 import zipfile
 import os
-import xml.etree.ElementTree as ET
-import sys
-sys.setrecursionlimit(1500)
 
-KML = objectify.ElementMaker(annotate=False)
 logging.getLogger().setLevel(logging.INFO)
 path_kmz_original = 'resources/final.kmz'
 path_kmz_tmp = 'resources/tmp.kmz'
