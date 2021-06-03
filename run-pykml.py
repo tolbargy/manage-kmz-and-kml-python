@@ -5,10 +5,10 @@ import zipfile
 import os
 
 logging.getLogger().setLevel(logging.INFO)
-path_kmz_original = 'resources/final.kmz'
-path_kmz_tmp = 'resources/tmp.kmz'
-name_file_kml = 'puntos.kml'
-path_rutas = 'resources/solo-ruta.kml'
+path_kmz_original = 'private/03.kmz'
+path_kmz_tmp = 'private/tmp.kmz'
+name_file_kml = 'doc.kml'
+path_rutas = 'private/R04-41.kml'
 
 def main():
     modificar_kml_y_volver_comprimir()
@@ -38,7 +38,7 @@ def procesar_agregacion_rutas(content):
     return xml_final
 
 def agregarDocumentRutaHaciaDocumentPunto(element_document_punto):    
-    with open(path_rutas,'r') as f:
+    with open(path_rutas,'r',encoding="utf8") as f:
         ruta_tree = parser.parse(f)        
         ruta_root = ruta_tree.getroot()
 
