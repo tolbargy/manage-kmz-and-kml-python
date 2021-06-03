@@ -9,7 +9,6 @@ path_kmz_original = 'resources/final.kmz'
 path_kmz_tmp = 'resources/tmp.kmz'
 name_file_kml = 'puntos.kml'
 path_rutas = 'resources/solo-ruta.kml'
-default_namespace = "http://www.opengis.net/kml/2.2"
 
 def main():
     modificar_kml_y_volver_comprimir()
